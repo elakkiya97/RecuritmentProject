@@ -1,0 +1,187 @@
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -90px; 
+
+}
+.main {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Align children at the top */
+  align-items: center; /* Center children horizontally */
+  min-height: 100vh;
+  margin-top: -100px;  
+  /* Set the height to 100vh to occupy the full viewport height */
+}
+/* Add !important to force the blue color */
+.ant-steps-item-title {
+  color:#105CAA !important;
+  font-weight: bold;
+   
+}
+
+  /* Login Section Styles */
+  .login-section {
+    background-color: #105CAA;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex:5; /* Add flex property to distribute space evenly */
+  }
+  
+  .section-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
+  .form-labels{
+    color:#105CAA;
+  }
+  
+  .info-container {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Rest of your existing styles */
+  
+  .login-section h3 {
+    font-size: 16px;
+    text-align:center;
+    
+  }
+  
+  .applicant-list {
+    margin-top: 20px;
+    list-style-type:disc;
+   
+  }
+  
+  /* Form Section Styles */
+  .form-section {
+    background-color:#8EC6FF;
+    padding: 20px;
+    border-radius: 2px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex:5; /* Add flex property to distribute space evenly */
+  }
+  
+  .application {
+    font-size: 28px;
+    margin-bottom:-45px;
+    color:white;
+    text-align: center;
+    margin-top:15px;
+  }
+  
+  /* Form Input Styles */
+  .form-label {
+    font-weight: bold;
+    color:#105CAA;
+    font-size: 14px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+    color:#105CAA;
+  }
+  
+  /* Next Button Styles */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    align-items: center;
+    font-size: 15px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: 'flex';
+    
+  }
+  .horizontal-list {
+    list-style-type:number;
+    display: flex;
+    flex-direction: row;
+    padding: 0; /* Remove default padding */
+    justify-content: space-between; 
+    /* Center-align horizontally */
+  }
+  
+  .horizontal-list li {
+    max-width: 200px; /* Adjust the value as needed */
+    margin: 0 auto;   /* Center-align the titles */
+    white-space: nowrap; /* Prevent titles from wrapping */
+    overflow: hidden;
+     /* 
+  /* Add spacing between list items */
+  }
+  .horizontal-list li {
+    text-align: center;
+    margin-right: 20px; /* Adjust the value to control the spacing */
+  }
+  
+  /* Apply margin to the last item to prevent excess spacing */
+  .horizontal-list li:last-child {
+    margin-right: 0;
+  }
+  /* Add this CSS to your Applicant.css file or your preferred CSS file */
+
+/* Define styles for the active step */
+.active-step {
+  /* Change the background color */
+  color:#105CAA; /* Change the text color */
+  font-weight: bold; /* Make the text bold */
+  /* Add any other styles you want for the active step */
+}
+
+  
+  /* Remove border box from dropdown options */
+.ant-select-item-option-content {
+  border: none !important;
+}
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+
+.h3{
+  text-align: center;
+  color:white;
+}
+.li{
+  
+  color:white;
+  text-align:justify;
+}
+  
+  
+
+
+ .placeholder{
+  color:#105CAA
+ }
+ /* ApplicantForm.css or your custom CSS file */
+.ant-input::placeholder,
+.ant-select-selection-placeholder {
+  color:#105CAA;
+  font-size: 12px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
