@@ -8,6 +8,7 @@ import Job from "./Component/job"
 import AppQues from "./Component/AppQues"
 import Review from "./Component/Review"
 import Dashboard from "./Component/Dashboard/Dashboard"
+import ManageUsers from "./Component/Dashboard/Manageusers"
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/Appque" element={<AppQues />} />
         <Route path="/Review" element={<Review />} />
         <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/manage" element={<ManageUsers />} />
+
       </Routes>
     </BrowserRouter>
   );

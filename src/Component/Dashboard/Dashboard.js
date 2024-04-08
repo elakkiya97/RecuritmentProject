@@ -4,6 +4,7 @@ import axios from "axios";
 import customLogo from "../../Component/mainlogo.png";
 import { Input, Button, Form, Col } from "antd";
 import { useForm } from "antd/lib/form/Form";
+import { NavLink } from 'react-router-dom';
 
 function App() {
   const [resumeData, setResumeData] = useState([]);
@@ -140,11 +141,11 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="#">
-              <i className="bx bxs-cog" />
-              <span className="text">Manage Users</span>
-            </a>
-          </li>
+  <NavLink to="/manage">
+    <i className="bx bxs-cog" />
+    <span className="text">Manage Users</span>
+  </NavLink>
+</li>
 
           <li>
             <a href="#">
