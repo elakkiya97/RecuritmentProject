@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Review = ({ isAcknowledgmentSubmitted }) => {
     return (
@@ -14,7 +14,7 @@ const Review = ({ isAcknowledgmentSubmitted }) => {
             )}
             {/* Other review content */}
         </div>
-    );
-};
+    )
+}
 
-export default Review;
+export default Review
