@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/Dashboard.css";
 import axios from "axios";
 import customLogo from "../../Component/mainlogo.png";
-import { Input, Button, Select, Form, Row, Col, notification } from "antd";
+import { Input, Button, Form, Col } from "antd";
 import { useForm } from "antd/lib/form/Form";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
     };
 
     fetchDepartments();
-  }, [skillOptions]); // Trigger effect when skillOptions changes
+  }, [skillOptions])
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
