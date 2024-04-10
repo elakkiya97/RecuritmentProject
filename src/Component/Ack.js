@@ -59,7 +59,7 @@ const Acknolege = ({
     }
 
     try {
-      const response = await axios.post(
+       await axios.post(
         `${API_BASE_URL}/api/Acknowledgment`,
         AckData,
         {
@@ -83,19 +83,17 @@ const Acknolege = ({
   }
 
   const handleOk = () => {
-    setIsSuccessModalVisible(false)
+    setIsSuccessModalVisible(false);
     setAckData({
       keepAccountOpen: false,
       receiveInformation: false,
       agreeToTerms: false,
-    })
-    if (currentStep === stepTitles.length - 2) {
-      handleNextStep()
-      window.location.reload()
-    } else {
-      handleNext()
-    }
-  }
+    });
+    window.location.href = "/";
+  };
+      
+    
+  
 
   return (
     <Form>

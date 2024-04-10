@@ -239,7 +239,7 @@ function AcceptResume() {
                               (e.target.style.backgroundColor = "#3C91E6")
                             }
                           >
-                            
+                            Approved
                           </button>
                           <button
                             onClick={() => handleReject(resume.id)}
