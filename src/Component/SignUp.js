@@ -35,6 +35,8 @@ function Signup() {
     lastName: "",
     email: "",
     password: "",
+    status:"New"
+  
   })
   const [registered, setRegistered] = useState(false)
 
@@ -51,6 +53,7 @@ function Signup() {
           lastName: registrationData.lastName,
           email: registrationData.email,
           password: registrationData.password,
+          status: registrationData.status,
         }
       )
 

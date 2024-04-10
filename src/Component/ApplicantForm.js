@@ -105,6 +105,7 @@ const ApplicantForm = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date)
   }
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
 

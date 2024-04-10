@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState ,useEffect} from "react"
 import axios from "axios"
 import S3Upload from "./S3Upload"
 import { useLocation } from "react-router-dom"
@@ -32,6 +32,11 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
     startDate: "22/09/2023",
     source: "",
     preferredContactMethod: "",
+    
+    
+  })
+  const [positionUserDTO, setDepartmentUserDTO] = useState({
+    id: "",
   })
 
   const [app1queData, setappQudata1] = useState({
@@ -61,6 +66,43 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
       [field]: value,
     })
   }
+ 
+  const handleChangeDepartment = (value) => {
+    // Find the selected position by its name
+    const selectedPosition = departmentOptions.find(position => position.positionName === value);
+    
+    // If a position is found, set its id in the state
+    if (selectedPosition) {
+      setDepartmentUserDTO({
+        id: selectedPosition.id,
+      });
+    }
+  };
+
+  const [departmentOptions, setDepartmentOptions] = useState([])
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/Position`);
+        const positionData = response.data.$values;
+        if (Array.isArray(positionData)) {
+          setDepartmentOptions(positionData);
+        } else {
+          console.error(
+            "Error fetching departments: Response data is not an array",
+            response
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+        // Handle error: Set apppos to a default value or display an error message
+      }
+    };
+  
+    fetchDepartments();
+  }, []);
+  
 
   const handleSubmit4 = async (e) => {
     e.preventDefault()
@@ -102,6 +144,8 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
         filePath: formData.uploadedFile,
         fileSize: 0,
         contentType: formData.uploadedFile.type,
+        status: true,
+        positionId:  positionUserDTO.id, 
       }
 
       const response2 = await axios.post(
@@ -114,6 +158,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
           },
         }
       )
+     
 
       handleNext()
     } catch (error) {
@@ -236,11 +281,10 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
                 className="form-control"
                 placeholder="source"
               >
-                <Option value="Websites">Websites</Option>
-                <Option value="Newspapers">Newspapers</Option>
-
-                <Option value="Facebook">Facebook</Option>
-                <Option value="LinkedIn">LinkedIn</Option>
+               <Option value="LinkedIn">LinkedIn</Option>
+  <Option value="Facebook">Facebook</Option>
+  <Option value="Friends">Friends</Option>
+  <Option value="Newspaper">Newspaper</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -311,7 +355,30 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
               </Radio.Group>
             </Form.Item>
           </Col>
-
+          <Col span={12}>
+            <Form.Item
+              label="catergory"
+              name="positionName"
+              rules={[
+                { required: true, message: "Please enter your first name." },
+              ]}
+            >
+             <Select
+  id="positionName"
+  name="positionName"
+  value={positionUserDTO.id} // Assuming positionName is the field representing the selected position
+  onChange={(value) => handleChangeDepartment(value)}
+  className="form-control"
+  placeholder="Desired Location"
+>
+  {departmentOptions.map((position) => (
+    <Option key={position.id} value={position.positionName}>
+      {position.positionName}
+    </Option>
+  ))}
+</Select>
+            </Form.Item>
+          </Col>
           <Col span={12}>
             <Form.Item
               label="Upload CV"

@@ -15,6 +15,7 @@ function App() {
         LastName: "Doe",
         Email: "johndoe@example.com",
         Password: "password",
+        status:"new"
       });
       setMessage(response.data.message);
       history.push("/");

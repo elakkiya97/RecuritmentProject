@@ -1,132 +1,104 @@
-import React, { useState, useEffect } from "react";
-import "../css/Dashboard.css";
-import axios from "axios";
-import customLogo from "../../Component/mainlogo.png";
-import { Input, Button, Form, Col } from "antd";
-import { useForm } from "antd/lib/form/Form";
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react"
+import "../css/Dashboard.css"
+import axios from "axios"
+import customLogo from "../../Component/mainlogo.png"
+
+import { NavLink } from "react-router-dom"
 
 function App() {
-  const [resumeData, setResumeData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All Resume");
-  const [viewedPDF, setViewedPDF] = useState(null);
-  const [form] = useForm();
-  const [showPopup, setShowPopup] = useState(false);
-  const [showAcceptedMessage, setShowAcceptedMessage] = useState(false);
-  const API_BASE_URL = "http://localhost:5042";
-  const [skillOptions, setSkillOptions] = useState({
-    skillType: 2, // Default value for skillType
-    skillName: "" // Default value for skillName
-  });
+  const [resumeData, setResumeData] = useState([])
+  
+
+  const API_BASE_URL = "http://localhost:5042"
+
+  const [allResumeCount, setAllResumeCount] = useState(0)
+  const [newResumeCount, setnewResumeCount] = useState(0)
+  const [approveResumeCount, setacceptResumeCount] = useState(0)
+  const [rejctResumeCount, setrejectResumeCount] = useState(0)
 
   useEffect(() => {
-    const fetchDepartments = async () => {
-      try {
-        const response = await axios.post(
-          `${API_BASE_URL}/api/Skill/CreateSkill`,
-          skillOptions
-        );
-      } catch (error) {
-        console.error("Error fetching departments:", error);
-      }
-    };
+    fetchResumeData()
+    fetchResumeData1()
+    fetchResumeData3()
+    fetchResumeData4()
+    fetchResumeData6()
+  }, [])
 
-    fetchDepartments();
-  }, [skillOptions])
+  const fetchResumeData3 = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/User/APROVE`)
+      setResumeData(response.data.$values)
+   
 
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    setSelectedCategory(category);
-    fetchResumeData(category);
-  };
-
-  const fetchResumeData = (category) => {
-    // Dummy data
-    const dummyData = [
-      {
-        id: 1,
-        name: "John Doe",
-        category: "UI/UX Designer",
-        resume: "https://example.com/resume2.pdf",
-        status: "Viewed",
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        category: "UI/UX Designer",
-        resume: "https://example.com/resume2.pdf",
-        status: "New",
-      },
-      {
-        id: 3,
-        name: "Michael Johnson",
-        category: "Frontend-Developer",
-        resume: "...",
-        status: "Viewed",
-      },
-      // Add more dummy data as needed
-    ];
-
-    // Filter data based on the selected category
-    let filteredData;
-    if (category === "All Resume") {
-      filteredData = dummyData;
-    } else {
-      filteredData = dummyData.filter(
-        (resume) => resume.category === category
-      );
+    } catch (error) {
+      console.error("Error fetching resume data:", error)
     }
-    setResumeData(filteredData);
-  };
+  }
 
-  const viewPDF = (pdfUrl) => {
-    setViewedPDF(pdfUrl);
-  };
+  const fetchResumeData6 = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/User/user`)
 
-  const openPopup = () => {
-    setShowPopup(true);
-  };
+      setAllResumeCount(response.data.$values.length)
+    
+      
+    } catch (error) {
+      console.error("Error fetching resume data (fetchResumeData1):", error)
+    }
+  }
 
-  const closePopup = () => {
-    setShowPopup(false);
-  };
+  const fetchResumeData = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/User/APROVE`)
 
-  const acceptResume = () => {
-    setShowPopup(false);
-    setShowAcceptedMessage(true);
-  };
+      setacceptResumeCount(response.data.$values.length)
+    
+    } catch (error) {
+      console.error("Error fetching resume data (fetchResumeData1):", error)
+    }
+  }
+  const fetchResumeData1 = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/User/NEW`)
 
-  const handleHardSkills = () => {
-    const selectedValues = form.getFieldValue("hardSkills");
-    setSkillOptions({
-      ...skillOptions,
-      skillName: selectedValues // Update only skillName, keep skillType as it is
-    });
-    console.log("Selected hard skills:", selectedValues);
-    // Further logic to handle selected values
-  };
+      setnewResumeCount(response.data.$values.length)
+    
+    } catch (error) {
+      console.error("Error fetching resume data (fetchResumeData1):", error)
+    }
+  }
+  const fetchResumeData4 = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/User/REJECT`)
+
+      setrejectResumeCount(response.data.$values.length)
+     
+    } catch (error) {
+      console.error("Error fetching resume data (fetchResumeData1):", error)
+    }
+  }
 
   return (
     <>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      {/* Boxicons */}
+
       <link
         href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
         rel="stylesheet"
       />
-      {/* My CSS */}
+
       <link rel="stylesheet" href="style.css" />
       <title>JobAdmin</title>
-      {/* SIDEBAR */}
+
       <section id="sidebar">
-        <a href="#" className="brand">
+        <a href="/dashboard" className="brand">
           <i className="bx bxs-smile" />
           <span className="text">JobAdmin</span>
         </a>
         <ul className="side-menu top">
           <li className="active">
-            <a href="#">
+            <a href="/dashboard">
               <i className="bx bxs-dashboard" />
               <span className="text">Dashboard</span>
             </a>
@@ -135,87 +107,102 @@ function App() {
 
         <ul className="side-menu">
           <li>
-            <a href="#">
-              <i className="bx bxs-cog" />
+            <NavLink to="/all">
               <span className="text">All Resume</span>
-            </a>
+            </NavLink>
           </li>
           <li>
-  <NavLink to="/manage">
-    <i className="bx bxs-cog" />
-    <span className="text">Manage Users</span>
-  </NavLink>
-</li>
+            <NavLink to="/new">
+              <span className="text">New Resume</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/accept">
+              <span className="text">Accept Resume</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/approve">
+              <span className="text">Approved Resume</span>
+            </NavLink>
+          </li>
 
           <li>
-            <a href="#">
-              <i className="bx bxs-cog" />
-              <span className="text">Settings</span>
-            </a>
+            <NavLink to="/reject">
+              <span className="text">Reject Resume</span>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="logout">
-              <i className="bx bxs-log-out-circle" />
-              <span className="text">Logout</span>
-            </a>
+            <NavLink to="/manage">
+              <span className="text">Manage Users</span>
+            </NavLink>
           </li>
         </ul>
       </section>
-      {/* SIDEBAR */}
-      {/* CONTENT */}
+
       <section id="content">
-        {/* NAVBAR */}
         <nav>
           <form action="#"></form>
 
-          <a href="#" className="profile">
+          <a href="/dashboard" className="profile">
             <img src={customLogo} alt="Custom Logo" />
           </a>
         </nav>
-        {/* NAVBAR */}
-        {/* MAIN */}
+
         <main>
           <div className="head-title">
             <div className="left">
               <h1>Dashboard</h1>
               <ul className="breadcrumb">
                 <li>
-                  <a href="#">Dashboard</a>
+                  <a href="/dashboard">Dashboard</a>
                 </li>
                 <li>
                   <i className="bx bx-chevron-right" />
                 </li>
-                <li>
-                  <a className="active" href="#">
-                    Home
-                  </a>
-                </li>
+                <li>Home</li>
               </ul>
             </div>
           </div>
           <ul className="box-info">
             <li>
               <span className="text">
-                <h3>1020</h3>
-                <p>New Resume</p>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "40px" }}
+                >
+                  <h2>{allResumeCount}</h2>
+                  <p>All Resume</p>
+                </div>
               </span>
             </li>
             <li>
               <span className="text">
-                <h3>2834</h3>
-                <p>View Resume</p>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "40px" }}
+                >
+                  <h3>{newResumeCount}</h3>
+                  <p>New Resume</p>
+                </div>
               </span>
             </li>
             <li>
               <span className="text">
-                <h3>2543</h3>
-                <p>Select Resume</p>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "40px" }}
+                >
+                  <h3>{approveResumeCount}</h3>
+                  <p>Approved Resume</p>
+                </div>
               </span>
             </li>
             <li>
               <span className="text">
-                <h3>2543</h3>
-                <p>Reject Resume</p>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "40px" }}
+                >
+                  <h3>{rejctResumeCount}</h3>
+                  <p>Rejected Resume</p>
+                </div>
               </span>
             </li>
           </ul>
@@ -223,107 +210,39 @@ function App() {
             <div className="order">
               <div className="head">
                 <h3>categories</h3>
-                <select
-                  className="nav-link"
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                >
-                  <option value="All Resume">All</option>
-                  <option value="UI/UXDesigner">UI/UX Designer</option>
-                  <option value="Frontend-Developer">Frontend-Developer</option>
-                  <option value="QualityAssurance">Quality Assurance</option>
-                  <option value="fullStackDeveloper">FullStackDeveloper</option>
-                </select>
               </div>
               <table>
                 <thead>
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Resume</th>
-                    <th>Status</th>
+                    <th>Email</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {resumeData.map((resume) => (
-                    <tr
-                      key={resume.id}
-                      style={{
-                        backgroundColor:
-                          resume.status === "Viewed" ? "#3C91E6" : "#CFE8FF",
-                        color: resume.status === "Viewed" ? "white" : "#3C91E6",
-                      }}
-                    >
-                      <td>{resume.id}</td>
-                      <td>{resume.name}</td>
-                      <td>
-                        <a
-                          href="#"
-                          onClick={() => viewPDF(resume.resume)}
-                          style={{
-                            color: resume.status === "Viewed" ? "white" : "#3C91E6",
-                          }}
-                        >
-                          {" "}
-                          {resume.status === "Viewed"
-                            ? "Viewed Resume"
-                            : "View Resume"}
-                        </a>
-                      </td>
-                      <td>{resume.status}</td>
-                    </tr>
-                  ))}
+                  {resumeData
+                    .slice(Math.max(resumeData.length - 10, 0))
+                    .map((resume) => (
+                      <tr key={resume.id}>
+                        <td>{resume.id}</td>
+                        <td>
+                          {resume.firstName} {resume.lastName}
+                        </td>
+                        <td>
+                          {resume.applicantDetails
+                            ? resume.applicantDetails.email
+                            : "N/A"}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
-            <div className="todo">
-              <div className="head">
-                <h3>fullView</h3>
-                <i className="bx bx-plus" />
-                <i className="bx bx-filter" />
-              </div>
-              <ul className="todo-list">
-                {viewedPDF && (
-                  <embed src={viewedPDF} type="application/pdf" width="100%" height="600px" />
-                )}
-
-                <ul>
-                  <li classname="list">Name: </li>
-                  <li classname="list">Phone Number: </li>
-                  <li classname="list">Email Address: </li>
-                  <button onClick={openPopup}>Accept</button>
-                  <button>Reject</button>
-                </ul>
-              </ul>
-
-              {showPopup && (
-                <div className="accepted-message">
-                  <h2>Resume Accepted Successfully!</h2>
-                  {/* Additional content or redirection logic can be added here */}
-                </div>
-              )}
-              <div>
-                <Col span={12}>
-                  <Form.Item
-                    label="HardSkills"
-                    name="hardSkills"
-                    rules={[
-                      { required: true, message: "Please enter your email address." },
-                    ]}
-                  >
-                    <Input />
-                    <Button onClick={handleHardSkills}>Set Hard Skills</Button>
-                  </Form.Item>
-                </Col>
-              </div>
-            </div>
           </div>
         </main>
-        {/* MAIN */}
       </section>
-      {/* CONTENT */}
     </>
-  );
+  )
 }
 
-export default App;
+export default App
