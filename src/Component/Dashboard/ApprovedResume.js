@@ -49,7 +49,7 @@ function Approve() {
       console.error("Error rejecting resume:", error)
     }
   }
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
   useEffect(() => {
     fetchResumeData3()

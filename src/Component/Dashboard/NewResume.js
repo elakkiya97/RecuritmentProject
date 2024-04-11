@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom"
 
 function NewResume() {
   const { Option } = Select
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
   const [selectedCategory, setSelectedCategory] = useState("All Resume")
   const [resumeData, setResumeData] = useState([])
   const [rejectData, setrejecttdata] = useState({

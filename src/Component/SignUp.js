@@ -26,7 +26,7 @@ const imageStyle1 = {
   height: "auto",
 }
 
-const API_BASE_URL = "http://localhost:5042"
+const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
 function Signup() {
   const [message, setMessage] = useState("")

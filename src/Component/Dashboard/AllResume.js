@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom"
 function App() {
   const [resumeData, setResumeData] = useState([])
 
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
   useEffect(() => {
     fetchResumeData()

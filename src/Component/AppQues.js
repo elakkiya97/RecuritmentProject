@@ -15,8 +15,7 @@ import {
   Col,
   notification,
 } from "antd"
-
-const API_BASE_URL = "http://localhost:5042"
+const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
 const { Option } = Select
 
@@ -126,7 +125,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
       return
     }
     try {
-      const response1 = await axios.post(
+      await axios.post(
         `${API_BASE_URL}/api/JobApplication/Job`,
         {
           ...appqueData,
@@ -148,7 +147,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
         positionId:  positionUserDTO.id, 
       }
 
-      const response2 = await axios.post(
+      await axios.post(
         `${API_BASE_URL}/api/FileUploadResponse/upload`,
 
         fileData,

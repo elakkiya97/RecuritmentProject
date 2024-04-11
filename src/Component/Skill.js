@@ -25,9 +25,9 @@ function Skill() {
       HardSkill: hardSkills,
       Language: languages
     };
-
+   
     try {
-      const response = await fetch('http://localhost:5042/api/education/skilluser', {
+      const response = await fetch('http://recruitmentapi.iykons.com/api/education/skilluser', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

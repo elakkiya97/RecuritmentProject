@@ -16,7 +16,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit"
 
-const API_BASE_URL = "http://localhost:5042"
+const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
 const imageStyle = {
   display: "block",

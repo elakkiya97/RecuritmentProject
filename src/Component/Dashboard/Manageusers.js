@@ -34,7 +34,7 @@ function ManageUsers() {
   const [newDepartment, setNewDepartment] = useState("")
   const [newPosition, setNewposition] = useState("")
 
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
   useEffect(() => {
     const fetchDepartments = async () => {

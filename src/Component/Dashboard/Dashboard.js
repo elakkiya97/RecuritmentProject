@@ -9,7 +9,7 @@ function App() {
   const [resumeData, setResumeData] = useState([])
   
 
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
   const [allResumeCount, setAllResumeCount] = useState(0)
   const [newResumeCount, setnewResumeCount] = useState(0)

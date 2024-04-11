@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "../Component/css/Applicant.css"
 import { Input, Button, Select, Form, Row, Col, notification } from "antd"
 
-const API_BASE_URL = "http://localhost:5042"
+const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
 const { Option } = Select
 

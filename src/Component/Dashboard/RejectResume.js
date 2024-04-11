@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react"
 function RejectResume() {
   const [resumeData, setResumeData] = useState([])
 
-  const API_BASE_URL = "http://localhost:5042"
+  const API_BASE_URL = "http://recruitmentapi.iykons.com"
 
   useEffect(() => {
     fetchResumeData4()
